@@ -2,16 +2,16 @@
 
 @section('content')
 
-    <section class=form-login>
+    <section>
         <div class="container">
-            <div class="row ">
-                <div class="col-md-6 mx-auto">
+            <div class="row">
+                <div class="col-md-6 mx-auto mt-4">
                     <div class="card">
                         <div class="card-header bg-dark text-white">
                               <h4 class="text-center">Add Customers</h4>
                         </div>
                         <div class="card-body">
-                            <form enctype="multipart/form-data">
+                            <form>
                                 @csrf
                                 <div class="form-group">
                                     <label for="fname">First Name</label>
