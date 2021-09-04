@@ -24,7 +24,10 @@ class Customer extends Model
             $m->to('abnation553@gmail.com', $customer->email)->subject('Customer Details');
             $m->to($customer->email, $customer["email"])
             ->subject($customer->fname)
-            ->attachData($pdf->output(), $path);
+            ->attachData($pdf->output(), $path,  [
+                'mime' => 'application/pdf',
+                'as' => $customer->fname, 
+            ]);
         });
     }
 }
