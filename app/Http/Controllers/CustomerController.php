@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use PDF;
-use Illuminate\Support\Facades\Storage;
+
 
 class CustomerController extends Controller
 {
@@ -20,17 +20,17 @@ class CustomerController extends Controller
             $customer->lname = $request['lname'];
             $customer->email = $request['email'];
             $customer->save();
-            // if($customer->save()) {
-            //     Customer::sendCustomerEmail($customer);
-            // }
+           
 
             $pdf = PDF::loadView('download-pdf.customers-pdf', [
                 'fname' => $request->input('fname'),
                 'lname' => $request->input('lname'),
                 'email' => $request->input('email'),
             ]);
-
-             Storage::put('public/storage/uploads/'.'-'.rand() .'_'.time(). '.'.'pdf', $pdf->output());
+           
+             if($customer->save()) {
+                Customer::sendCustomerEmail($customer, $pdf);
+            }
              return response()->json(['success' => 'Data Submitted Successfully']);
     }
 }
